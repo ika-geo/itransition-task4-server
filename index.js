@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const MainRoute = require('./routes/mainRoute')
+const {register, login} = require("./controllers/authController");
+const {getUsers} = require("./controllers/userController");
 
 dotenv.config();
 const app = express();
@@ -15,7 +17,18 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.use('/', MainRoute);
+// app.use('/', MainRoute);
+
+app.get('/test', function(req, res){
+    res.send('test');
+})
+app.get('/json', function(req, res){
+    res.json({message:'hello world'});
+})
+app.get('/api/users', getUsers)
+app.get('/', function(req, res){
+    res.send('API is running...');
+})
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
