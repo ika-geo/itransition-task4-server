@@ -2,17 +2,16 @@ const User = require('../models/User');
 const getUsersDto = require('../dtos/getUsersDto')
 
 const getUsers = async (req, res) => {
-    res.status(200).json({message: 'users'});
-    // try {
-    //     const users = await User.find();
-    //     let usersResult = []
-    //     users.map(user =>{
-    //         usersResult.push(getUsersDto(user))
-    //     })
-    //     res.status(200).json(usersResult);
-    // } catch (error) {
-    //     res.status(500).json({ error: error.message, message: 'Failed to fetch users' });
-    // }
+    try {
+        const users = await User.find();
+        let usersResult = []
+        users.map(user =>{
+            usersResult.push(getUsersDto(user))
+        })
+        res.status(200).json(usersResult);
+    } catch (error) {
+        res.status(500).json({ error: error.message, message: 'Failed to fetch users' });
+    }
 };
 
 const blockUsers = async (req, res) => {
