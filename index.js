@@ -21,7 +21,7 @@ app.get('/test', function(req, res){
 app.get('/json', function(req, res){
     res.json({message:'hello world'});
 })
-app.get('/users', getUsers)
+app.get('/api/users', getUsers)
 app.get('/', function(req, res){
     res.send('API is running...');
 })
