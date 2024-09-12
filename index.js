@@ -2,7 +2,6 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
-const {getUsers} = require("./controllers/userController");
 
 dotenv.config();
 const app = express();
@@ -15,14 +14,10 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.get('/test', function(req, res){
-    res.send('test');
-})
-app.get('/json', function(req, res){
-    res.json({message:'hello world'});
-})
-app.get('/api/users', getUsers)
-app.get('/', function(req, res){
+app.use('/api/auth', AuthRoute);
+app.use('/api/users', UserRoute);
+
+app.use('/', function (req, res){
     res.send('API is running...');
 })
 
