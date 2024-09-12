@@ -2,8 +2,6 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
-const MainRoute = require('./routes/mainRoute')
-const {register, login} = require("./controllers/authController");
 const {getUsers} = require("./controllers/userController");
 
 dotenv.config();
@@ -17,8 +15,6 @@ app.use(cors({
 }));
 
 app.use(express.json());
-// app.use('/', MainRoute);
-
 app.get('/test', function(req, res){
     res.send('test');
 })
