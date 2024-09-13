@@ -16,7 +16,6 @@ const getUsers = async (req, res) => {
 
 const blockUsers = async (req, res) => {
     const { userIds } = req.body;
-    console.log(userIds)
     try {
         if (!Array.isArray(userIds) || userIds.length === 0) {
             return res.status(400).json({ message: 'No user IDs provided' });
@@ -78,9 +77,8 @@ const deleteUsers = async (req, res) => {
     }
 };
 
-const deleteUserAsUser = async (req, res) => {
+const selfDelete = async (req, res) => {
     const userId = req.body.id;
-    console.log(userId)
     try {
         const result = await User.findByIdAndDelete(userId);
 
@@ -100,5 +98,5 @@ module.exports = {
     unblockUsers,
     selfBlock,
     deleteUsers,
-    deleteUserAsUser
+    selfDelete
 };

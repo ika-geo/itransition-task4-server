@@ -13,7 +13,8 @@ exports.register = async (req, res) => {
         if (user) return res.status(400).json({ message: 'User already exists' });
         const salt = await bcrypt.genSalt(10);
         password = await bcrypt.hash(password, salt);
-        user = new User({ name, email, password, role });
+        let myId = await bcrypt.hash(email, salt);
+        user = new User({ name, email, password, role, myId });
         user.lastLogin = Date.now();
         let newUser = await user.save();
         let result = userDto(newUser)
